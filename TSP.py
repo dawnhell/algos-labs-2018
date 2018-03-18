@@ -1,12 +1,13 @@
 from random import random
 
 NO_EDGE = -1
+MAX_VAL = 999999999
 
 
 def main():
     arr, n = read_array()
     print n, arr
-    find_cycle(arr, n)
+    print tsp_brute_force(arr, n)
 
 
 def generate_graph(n, max_val):
@@ -54,6 +55,30 @@ def find_cycle(array, n):
     else:
         print "Acyclic"
 
+
+def tsp_brute_force(array, n):
+    path = [0]
+    path_cost = 0
+    prev_index = 0
+
+    for i in range(n):
+        min_val = MAX_VAL
+        min_index = 0
+
+        for j, item in enumerate(array[prev_index]):
+            if prev_index != j and item < min_val:
+                if i == n - 1:
+                    min_val = item
+                    min_index = j
+                elif j not in path:
+                    min_val = item
+                    min_index = j
+
+        prev_index = min_index
+        path.append(min_index)
+        path_cost += min_val
+
+    return path, path_cost
 
 
 main()
