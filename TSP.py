@@ -1,4 +1,5 @@
 from random import random
+import time
 
 NO_EDGE = -1
 MAX_VAL = 999999999
@@ -7,7 +8,16 @@ MAX_VAL = 999999999
 def main():
     arr, n = read_array()
     print n, arr
+
+    start_time = time.time()
     print tsp_brute_force(arr, n)
+    tsp_brute_force_time = time.time() - start_time
+    print tsp_brute_force_time
+
+    start_time = time.time()
+    print tsp_greedy(arr, n)
+    tsp_greedy_time = time.time() - start_time
+    print tsp_greedy_time
 
 
 def generate_graph(n, max_val):
@@ -56,7 +66,40 @@ def find_cycle(array, n):
         print "Acyclic"
 
 
+def generate_permutations(array, low=0):
+    if low + 1 >= len(array):
+        yield array
+    else:
+        for p in generate_permutations(array, low + 1):
+            yield p
+        for i in range(low + 1, len(array)):
+            array[low], array[i] = array[i], array[low]
+            for p in generate_permutations(array, low + 1):
+                yield p
+            array[low], array[i] = array[i], array[low]
+
+
 def tsp_brute_force(array, n):
+    path_cost = MAX_VAL
+    path = []
+
+    for permutation in generate_permutations(range(n), 1):
+        length = len(permutation)
+        temp_cost = 0
+
+        for i in range(length - 1):
+            temp_cost += array[permutation[i]][permutation[i + 1]]
+
+        temp_cost += array[permutation[length - 1]][0]
+
+        if temp_cost < path_cost:
+            path = list(permutation)
+            path_cost = temp_cost
+
+    return path, path_cost
+
+
+def tsp_greedy(array, n):
     path = [0]
     path_cost = 0
     prev_index = 0
