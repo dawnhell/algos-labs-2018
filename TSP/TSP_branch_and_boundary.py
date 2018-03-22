@@ -41,7 +41,8 @@ class TSPBranchAndBoundary:
 
         temp = [-1] * self.graph_size
         while self.saved_vertex.prev:
-            temp[self.saved_vertex.vertex[0]] = self.saved_vertex.vertex[1]
+            if self.saved_vertex.is_taken:
+                temp[self.saved_vertex.vertex[0]] = self.saved_vertex.vertex[1]
             self.saved_vertex = self.saved_vertex.prev
 
         answer = []
