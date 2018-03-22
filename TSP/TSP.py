@@ -1,23 +1,33 @@
 from random import random
 import time
 
+from TSP_branch_and_boundary import TSPBranchAndBoundary
+
 NO_EDGE = -1
 MAX_VAL = 999999999
 
 
 def main():
     arr, n = read_array()
-    print n, arr
+    print n, "\n", arr, "\n"
 
+    print "Brute force:"
     start_time = time.time()
     print tsp_brute_force(arr, n)
     tsp_brute_force_time = time.time() - start_time
-    print tsp_brute_force_time
+    print tsp_brute_force_time, "\n"
 
+    print "Greedy:"
     start_time = time.time()
     print tsp_greedy(arr, n)
     tsp_greedy_time = time.time() - start_time
-    print tsp_greedy_time
+    print tsp_greedy_time, "\n"
+
+    print "Branch and boundary:"
+    start_time = time.time()
+    TSPBranchAndBoundary(arr).solve()
+    tsp_branch_and_boundary_time = time.time() - start_time
+    print tsp_branch_and_boundary_time, "\n"
 
 
 def generate_graph(n, max_val):
@@ -25,7 +35,7 @@ def generate_graph(n, max_val):
 
 
 def read_array():
-    input_file = open("TSP.txt", "r")
+    input_file = open("TSP/TSP.txt", "r")
     n = int(input_file.readline())
     arr = []
 
