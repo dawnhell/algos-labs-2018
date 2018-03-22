@@ -65,7 +65,7 @@ class TSPBranchAndBoundary:
 
             vertex_to_go = (solution.vertices[0][self.max_fine_item[0]], solution.vertices[1][self.max_fine_item[1]])
 
-            if not solution.phi + self.max_fine == float("inf"):
+            if not solution.phi + self.max_fine == float("inf") and solution.phi + self.max_fine < self.path_cost:
                 temp_matrix = solution.matrix
                 if solution.vertex:
                     temp_matrix[solution.vertices[0].index(vertex_to_go[0]), solution.vertices[1].index(vertex_to_go[1])] = float("inf")

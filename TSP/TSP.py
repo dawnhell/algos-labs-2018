@@ -2,6 +2,7 @@ from random import random
 import time
 
 from TSP_branch_and_boundary import TSPBranchAndBoundary
+from TSP_local_search import TSPLocalSearch
 
 NO_EDGE = -1
 MAX_VAL = 999999999
@@ -28,6 +29,12 @@ def main():
     TSPBranchAndBoundary(arr).solve()
     tsp_branch_and_boundary_time = time.time() - start_time
     print tsp_branch_and_boundary_time, "\n"
+
+    print "Local search(2 substitution):"
+    start_time = time.time()
+    print TSPLocalSearch(arr).solve_2_substitution()
+    tsp_local_search_2_time = time.time() - start_time
+    print tsp_local_search_2_time, "\n"
 
 
 def generate_graph(n, max_val):
