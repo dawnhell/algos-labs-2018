@@ -30,11 +30,17 @@ def main():
     tsp_branch_and_boundary_time = time.time() - start_time
     print tsp_branch_and_boundary_time, "\n"
 
-    print "Local search(2 substitution):"
+    print "Local search(2 opt):"
     start_time = time.time()
-    print TSPLocalSearch(arr).solve_2_substitution()
+    print TSPLocalSearch(arr).solve_2_opt()
     tsp_local_search_2_time = time.time() - start_time
     print tsp_local_search_2_time, "\n"
+
+    print "Local search(3 opt):"
+    start_time = time.time()
+    print TSPLocalSearch(arr).solve_3_opt()
+    tsp_local_search_3_time = time.time() - start_time
+    print tsp_local_search_3_time, "\n"
 
 
 def generate_graph(n, max_val):
