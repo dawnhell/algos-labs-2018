@@ -14,8 +14,6 @@ class TSPLocalSearch:
         while can_update and self.path_cost > 0:
             can_update = self.can_update_2_opt()
 
-        print self.path_cost, self.path
-
         return self.path, self.path_cost
 
     def solve_3_opt(self):
@@ -23,8 +21,6 @@ class TSPLocalSearch:
 
         while can_update and self.path_cost > 0:
             can_update = self.can_update_3_opt()
-
-        print self.path_cost, self.path
 
         return self.path, self.path_cost
 

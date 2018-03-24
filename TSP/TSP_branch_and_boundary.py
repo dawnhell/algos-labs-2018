@@ -52,7 +52,7 @@ class TSPBranchAndBoundary:
             n = temp[n]
             self.graph_size -= 1
 
-        print (answer, self.path_cost)
+        return answer, self.path_cost
 
     def split_plurality(self, solution):
         if not solution:
