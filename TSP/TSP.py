@@ -9,12 +9,13 @@ MAX_VAL = 999999999
 
 
 def main():
-    # arr, n = read_array()
-    # print n, "\n", arr, "\n"
-
     f = open("TSP/results.txt", "rw+")
 
-    for i in range(9, 14):
+    # arr, n = read_array()
+    # print n, "\n", arr, "\n"
+    # perform_comparison(arr, n, f)
+
+    for i in range(9, 13):
         arr = generate_graph(i, 100)
         perform_comparison(arr, i, f)
 

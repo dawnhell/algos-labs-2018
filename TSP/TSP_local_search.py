@@ -63,37 +63,17 @@ class TSPLocalSearch:
 
     def can_update_3_opt(self):
         for index, item in enumerate(self.path):
-            for j in range(2, self.graph_size - 4):
-                for k in range(2, self.graph_size - 6):
-                    ia = index + 1
-                    ib = index + j + 1
-                    ic = index + j + k + 1
+            for j in range(1, self.graph_size):
+                if abs(j - index) > 1:
+                    new_path = self.path
+                    new_path = np.delete(new_path, index, 0)
 
-                    if ic > self.graph_size:
-                        diff = ic - self.graph_size
+                    new_path = np.insert(new_path, j, item)
+                    new_cost = self.find_path_cost(new_path)
 
-                        self.path = np.roll(self.path, -diff)
-                        ia -= diff
-                        ib -= diff
-                        ic -= diff
-
-                    new_path = self.path[:ia - 1]
-                    new_path = np.append(new_path, self.path[ia - 1])
-                    new_path = np.append(new_path, self.path[ib])
-                    new_path = np.concatenate((new_path, self.path[ib + 1:ic - 1]))
-                    new_path = np.append(new_path, self.path[ic - 1])
-                    new_path = np.append(new_path, self.path[ib - 1])
-                    new_path = np.concatenate((new_path, np.array(list(reversed(self.path[ia + 1:ib - 1])))))
-                    new_path = np.append(new_path, self.path[ia])
-                    new_path = np.append(new_path, self.path[ic])
-                    new_path = np.concatenate((new_path, self.path[ic + 1:]))
-                    new_path = map(int, new_path)
-
-                    new_path_cost = self.find_path_cost(new_path)
-
-                    if new_path_cost < self.path_cost:
+                    if new_cost < self.path_cost:
+                        self.path_cost = new_cost
                         self.path = new_path
-                        self.path_cost = new_path_cost
                         return True
 
         return False
