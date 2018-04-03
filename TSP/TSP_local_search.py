@@ -36,23 +36,10 @@ class TSPLocalSearch:
         return cost
 
     def can_update_2_opt(self):
-        for index, item in enumerate(self.path):
-            for j in range(2, self.graph_size - 2):
-                ia = index + 1
-                ib = index + j + 1
-
-                new_path = self.path
-
-                if ib > self.graph_size:
-                    diff = ib - self.graph_size
-
-                    new_path = np.roll(new_path, -diff)
-                    ia -= diff
-                    ib -= diff
-
-                new_path = np.concatenate((new_path[:ia], np.array(list(reversed(new_path[ia:ib]))), new_path[ib:]))
-
-                new_path_cost = self.find_path_cost(map(int, new_path))
+        for i in range(1, len(self.path) - 1):
+            for j in range(i + 1, len(self.path)):
+                new_path = np.concatenate((self.path[:i], self.path[i: j][::-1], self.path[j:]))
+                new_path_cost = self.find_path_cost(new_path)
 
                 if new_path_cost < self.path_cost:
                     self.path = new_path

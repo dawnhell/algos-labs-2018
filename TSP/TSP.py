@@ -3,6 +3,7 @@ import time
 
 from TSP_branch_and_boundary import TSPBranchAndBoundary
 from TSP_local_search import TSPLocalSearch
+from TSP_simulated_annealing import TSPSimulatedAnnealing
 
 NO_EDGE = -1
 MAX_VAL = 999999999
@@ -15,9 +16,9 @@ def main():
     # print n, "\n", arr, "\n"
     # perform_comparison(arr, n, f)
 
-    for i in range(9, 13):
-        arr = generate_graph(i, 100)
-        perform_comparison(arr, i, f)
+    for i in range(10, 25):
+        arr = generate_graph(10, 100)
+        perform_comparison(arr, 10, f)
 
     f.close()
 
@@ -28,15 +29,35 @@ def perform_comparison(arr, n, f):
         f.write(str(arr[i]) + "\n")
     f.write("\n")
 
-    print "Brute force:"
-    f.write("Brute force:\n")
+    print "Simulated annealing(Koshi):"
+    f.write("\nSimulated annealing(Koshi):\n")
     start_time = time.time()
-    res = tsp_brute_force(arr, n)
+    res = TSPSimulatedAnnealing(arr).solve_koshi()
     print res
     f.write(str(res) + "\n")
-    tsp_brute_force_time = time.time() - start_time
-    print tsp_brute_force_time, "\n"
-    f.write(str(tsp_brute_force_time) + "\n")
+    tsp_sa_koshi_time = time.time() - start_time
+    print tsp_sa_koshi_time, "\n"
+    f.write(str(tsp_sa_koshi_time) + "\n")
+
+    print "Simulated annealing(Bolcano):"
+    f.write("\nSimulated annealing(Bolcano):\n")
+    start_time = time.time()
+    res = TSPSimulatedAnnealing(arr).solve_koshi()
+    print res
+    f.write(str(res) + "\n")
+    tsp_sa_bolcano_time = time.time() - start_time
+    print tsp_sa_bolcano_time, "\n"
+    f.write(str(tsp_sa_bolcano_time) + "\n")
+
+    # print "Brute force:"
+    # f.write("Brute force:\n")
+    # start_time = time.time()
+    # res = tsp_brute_force(arr, n)
+    # print res
+    # f.write(str(res) + "\n")
+    # tsp_brute_force_time = time.time() - start_time
+    # print tsp_brute_force_time, "\n"
+    # f.write(str(tsp_brute_force_time) + "\n")
 
     print "Greedy:"
     f.write("\nGreedy:\n")
@@ -48,35 +69,35 @@ def perform_comparison(arr, n, f):
     print tsp_greedy_time, "\n"
     f.write(str(tsp_greedy_time) + "\n")
 
-    print "Branch and boundary:"
-    f.write("\nBranch and boundary:\n")
-    start_time = time.time()
-    res = TSPBranchAndBoundary(arr).solve()
-    print res
-    f.write(str(res) + "\n")
-    tsp_branch_and_boundary_time = time.time() - start_time
-    print tsp_branch_and_boundary_time, "\n"
-    f.write(str(tsp_branch_and_boundary_time) + "\n")
+    # print "Branch and boundary:"
+    # f.write("\nBranch and boundary:\n")
+    # start_time = time.time()
+    # res = TSPBranchAndBoundary(arr).solve()
+    # print res
+    # f.write(str(res) + "\n")
+    # tsp_branch_and_boundary_time = time.time() - start_time
+    # print tsp_branch_and_boundary_time, "\n"
+    # f.write(str(tsp_branch_and_boundary_time) + "\n")
 
-    print "Local search(2 opt):"
-    f.write("\nLocal search(2 opt):\n")
-    start_time = time.time()
-    res = TSPLocalSearch(arr).solve_2_opt()
-    print res
-    f.write(str(res) + "\n")
-    tsp_local_search_2_time = time.time() - start_time
-    print tsp_local_search_2_time, "\n"
-    f.write(str(tsp_local_search_2_time) + "\n")
+    # print "Local search(2 opt):"
+    # f.write("\nLocal search(2 opt):\n")
+    # start_time = time.time()
+    # res = TSPLocalSearch(arr).solve_2_opt()
+    # print res
+    # f.write(str(res) + "\n")
+    # tsp_local_search_2_time = time.time() - start_time
+    # print tsp_local_search_2_time, "\n"
+    # f.write(str(tsp_local_search_2_time) + "\n")
 
-    print "Local search(3 opt):"
-    f.write("\nLocal search(3 opt):\n")
-    start_time = time.time()
-    res = TSPLocalSearch(arr).solve_3_opt()
-    print res
-    f.write(str(res) + "\n")
-    tsp_local_search_3_time = time.time() - start_time
-    print tsp_local_search_3_time, "\n"
-    f.write(str(tsp_local_search_3_time) + "\n")
+    # print "Local search(3 opt):"
+    # f.write("\nLocal search(3 opt):\n")
+    # start_time = time.time()
+    # res = TSPLocalSearch(arr).solve_3_opt()
+    # print res
+    # f.write(str(res) + "\n")
+    # tsp_local_search_3_time = time.time() - start_time
+    # print tsp_local_search_3_time, "\n"
+    # f.write(str(tsp_local_search_3_time) + "\n")
 
 
 def generate_graph(n, max_val):
