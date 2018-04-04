@@ -38,7 +38,7 @@ class TSPSimulatedAnnealing:
 
         return self.path, self.path_cost
 
-    def solve_bolcano(self):
+    def solve_bolcman(self):
         temperature = 13
         temperature_max = 13
         temperature_min = 1

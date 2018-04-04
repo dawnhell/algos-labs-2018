@@ -16,7 +16,7 @@ def main():
     # print n, "\n", arr, "\n"
     # perform_comparison(arr, n, f)
 
-    for i in range(10, 25):
+    for i in range(10, 20):
         arr = generate_graph(10, 100)
         perform_comparison(arr, 10, f)
 
@@ -29,35 +29,35 @@ def perform_comparison(arr, n, f):
         f.write(str(arr[i]) + "\n")
     f.write("\n")
 
-    print "Simulated annealing(Koshi):"
-    f.write("\nSimulated annealing(Koshi):\n")
-    start_time = time.time()
-    res = TSPSimulatedAnnealing(arr).solve_koshi()
-    print res
-    f.write(str(res) + "\n")
-    tsp_sa_koshi_time = time.time() - start_time
-    print tsp_sa_koshi_time, "\n"
-    f.write(str(tsp_sa_koshi_time) + "\n")
-
-    print "Simulated annealing(Bolcano):"
-    f.write("\nSimulated annealing(Bolcano):\n")
-    start_time = time.time()
-    res = TSPSimulatedAnnealing(arr).solve_koshi()
-    print res
-    f.write(str(res) + "\n")
-    tsp_sa_bolcano_time = time.time() - start_time
-    print tsp_sa_bolcano_time, "\n"
-    f.write(str(tsp_sa_bolcano_time) + "\n")
-
-    # print "Brute force:"
-    # f.write("Brute force:\n")
+    # print "Simulated annealing(Koshi):"
+    # f.write("\nSimulated annealing(Koshi):\n")
     # start_time = time.time()
-    # res = tsp_brute_force(arr, n)
+    # res = TSPSimulatedAnnealing(arr).solve_koshi()
     # print res
     # f.write(str(res) + "\n")
-    # tsp_brute_force_time = time.time() - start_time
-    # print tsp_brute_force_time, "\n"
-    # f.write(str(tsp_brute_force_time) + "\n")
+    # tsp_sa_koshi_time = time.time() - start_time
+    # print tsp_sa_koshi_time, "\n"
+    # f.write(str(tsp_sa_koshi_time) + "\n")
+
+    # print "Simulated annealing(Bolcman):"
+    # f.write("\nSimulated annealing(Bolcman):\n")
+    # start_time = time.time()
+    # res = TSPSimulatedAnnealing(arr).solve_koshi()
+    # print res
+    # f.write(str(res) + "\n")
+    # tsp_sa_bolcman_time = time.time() - start_time
+    # print tsp_sa_bolcman_time, "\n"
+    # f.write(str(tsp_sa_bolcman_time) + "\n")
+
+    print "Brute force:"
+    f.write("\nBrute force:\n")
+    start_time = time.time()
+    res = tsp_brute_force(arr, n)
+    print res
+    f.write(str(res) + "\n")
+    tsp_brute_force_time = time.time() - start_time
+    print tsp_brute_force_time, "\n"
+    f.write(str(tsp_brute_force_time) + "\n")
 
     print "Greedy:"
     f.write("\nGreedy:\n")
@@ -69,15 +69,15 @@ def perform_comparison(arr, n, f):
     print tsp_greedy_time, "\n"
     f.write(str(tsp_greedy_time) + "\n")
 
-    # print "Branch and boundary:"
-    # f.write("\nBranch and boundary:\n")
-    # start_time = time.time()
-    # res = TSPBranchAndBoundary(arr).solve()
-    # print res
-    # f.write(str(res) + "\n")
-    # tsp_branch_and_boundary_time = time.time() - start_time
-    # print tsp_branch_and_boundary_time, "\n"
-    # f.write(str(tsp_branch_and_boundary_time) + "\n")
+    print "Branch and boundary:"
+    f.write("\nBranch and boundary:\n")
+    start_time = time.time()
+    res = TSPBranchAndBoundary(arr).solve()
+    print res
+    f.write(str(res) + "\n")
+    tsp_branch_and_boundary_time = time.time() - start_time
+    print tsp_branch_and_boundary_time, "\n"
+    f.write(str(tsp_branch_and_boundary_time) + "\n")
 
     # print "Local search(2 opt):"
     # f.write("\nLocal search(2 opt):\n")
@@ -113,37 +113,6 @@ def read_array():
         arr.append([int(x) for x in input_file.readline().split()])
 
     return arr, n
-
-
-def dfs(array, vertex, colors, is_cyclic):
-    colors[vertex] = 1
-
-    for i, item in enumerate(array[vertex]):
-        if i != vertex and item != NO_EDGE:
-            if colors[i] == 0:
-                if dfs(array, i, colors, is_cyclic):
-                    return True
-            elif colors[i] == 1:
-                return True
-
-    colors[vertex] = 2
-
-    return False
-
-
-def find_cycle(array, n):
-    colors = [0] * n
-    is_cyclic = False
-
-    for i in range(n):
-        if dfs(array, i, colors, is_cyclic):
-            is_cyclic = True
-            break
-
-    if is_cyclic:
-        print "Cyclic"
-    else:
-        print "Acyclic"
 
 
 def generate_permutations(array, low=0):
