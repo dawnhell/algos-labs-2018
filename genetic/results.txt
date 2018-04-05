@@ -1,0 +1,16 @@
+Diophantine equation x + 2y + 3z = 30:
+
+Rank selection:
+Fitness: 0, solution: [3, 0, 9], iterations: 80
+
+Tournament selection:
+Fitness: 0, solution: [3, 6, 5], iterations: 50
+
+
+Diophantine equation a + 2b + 3c + 5d + 23e + 7f + 45g + 23h + i + 87j + 34k = 500:
+
+Rank selection:
+Fitness: 0, solution: [3, 0, 2, 8, 7, 1, 1, 5, 2, 1, 1], iterations: 1821
+
+Tournament selection:
+Fitness: 0, solution: [7, 2, 5, 7, 4, 0, 1, 1, 56, 1, 4], iterations: 529

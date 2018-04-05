@@ -8,11 +8,11 @@ class GeneticAlgorithmDiophantine:
         self.population = initial_population
         self.chromosome_size = len(initial_population[0])
 
-    def solve(self):
+    def solve(self, param):
         current_fitness = self.calculate_fitness(self.equation, self.population[0], self.result)
         iterations = 0
 
-        while current_fitness > 0 and iterations < 1000:
+        while current_fitness > 0 and iterations < 20000:
             iterations += 1
             middle = int(len(self.population) / 2)
 
@@ -29,8 +29,10 @@ class GeneticAlgorithmDiophantine:
                 self.population += [child1]
                 self.population += [child2]
 
-            # self.rang_selection()
-            self.tournament_selection()
+            if param == 1:
+                self.rang_selection()
+            elif param == 2:
+                self.tournament_selection()
 
             fitness = self.calculate_fitness(self.equation, self.population[0], self.result)
 
