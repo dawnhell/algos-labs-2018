@@ -8,7 +8,7 @@ def main():
     very_very_simple_equation = [1, 2, 3]
     result = 30
     initial_population = [
-        [int(random() * result) for _ in range(len(very_very_simple_equation))]
+        [int(random() * result * 2 - result) for _ in range(len(very_very_simple_equation))]
         for _ in range(5)
     ]
     answer = GeneticAlgorithmDiophantine(very_very_simple_equation, result, initial_population).solve(1)
@@ -25,7 +25,7 @@ def main():
     more_complex_equation = [1, 2, 3, 5, 23, 7, 45, 23, 1, 87, 34]
     result = 500
     initial_population = [
-        [int(random() * result) for _ in range(len(more_complex_equation))]
+        [int(random() * result * 2 - result) for _ in range(len(more_complex_equation))]
         for _ in range(10)
     ]
     answer = GeneticAlgorithmDiophantine(more_complex_equation, result, initial_population).solve(1)

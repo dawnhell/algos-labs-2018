@@ -12,7 +12,7 @@ class GeneticAlgorithmDiophantine:
         current_fitness = self.calculate_fitness(self.equation, self.population[0], self.result)
         iterations = 0
 
-        while current_fitness > 0 and iterations < 20000:
+        while current_fitness > 0 and iterations < 50000:
             iterations += 1
             middle = int(len(self.population) / 2)
 
